@@ -1,42 +1,75 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package models;
 
+package app.models;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
- * @author ismailmohammed
+ * @author Aman
  */
 
 @Entity
+@Table (name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long UserId;
+    
+    @NotBlank(message = "First name is mandatory")
+    @Size (max = 50, message = "First name cannot be longer than 50 characters")
     private String name;
+    
+    @NotBlank(message = "Last name is mandatory")
+    @Size(max = 50, message = "Last name cannot be longer than 50 characters")
     private String lastName;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    
+    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email is mandotary")
+    private String email;
+    
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+    
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+    
+    public User(String name, String lastName, String email, Role role){
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+    }
     
     public User(){
     }
     
-    public User(String name, String lastName){
-        this.name = name;
-        this.lastName = lastName;
-    }
-    
-        public Long getId() {
-        return id;
+    public Long getId() {
+        return UserId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.UserId = id;
     }
 
     public String getName() {
@@ -55,4 +88,26 @@ public class User {
         this.lastName = lastName;
     }
     
+     public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }  
+     public String getEmail(){
+        return email;
+    }
+     
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 }
