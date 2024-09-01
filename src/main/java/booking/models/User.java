@@ -33,7 +33,7 @@ public class User {
     @Column (name = "user_id")
     private Long UserId;
     
-    @NotBlank(message = "First name is mandatory")
+    @NotBlank(message = "First name is mandatory ")
     @Size (max = 50, message = "First name cannot be longer than 50 characters")
     private String name;
     
