@@ -1,4 +1,4 @@
-package app;
+package com.example.booking_system;
 
 
 import org.springframework.boot.SpringApplication;

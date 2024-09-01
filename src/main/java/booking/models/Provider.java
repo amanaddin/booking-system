@@ -1,5 +1,5 @@
 
-package app.models;
+package booking.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

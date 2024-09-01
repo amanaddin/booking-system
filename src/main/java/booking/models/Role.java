@@ -1,5 +1,5 @@
 
-package app.models;
+package booking.models;
 
 /**
  *

@@ -1,5 +1,5 @@
 
-package app.models;
+package booking.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +30,7 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "user_id")
     private Long UserId;
     
     @NotBlank(message = "First name is mandatory")
@@ -45,7 +46,12 @@ public class User {
     
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email is mandotary")
+    @Column (unique = true)
     private String email;
+    
+    @Column(name = "password")
+    private String password;
+
     
     @CreationTimestamp
     @Column(updatable = false)
@@ -53,6 +59,7 @@ public class User {
     
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
     
     public User(String name, String lastName, String email, Role role){
         this.name = name;
@@ -109,5 +116,21 @@ public class User {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+    
+     public Long getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Long UserId) {
+        this.UserId = UserId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
