@@ -23,10 +23,10 @@ FROM eclipse-temurin:17-jdk
 WORKDIR /app
 
 # Copy the jar file from the build stage
-COPY --from=build /app/target/your-application.jar /app/your-application.jar
+COPY --from=build /app/target/booking-system-0.0.1-SNAPSHOT.jar /app/booking-system.jar
 
 # Expose the port the application runs on
 EXPOSE 8080
 
 # Run the application
-ENTRYPOINT ["java", "-jar", "your-application.jar"]
+ENTRYPOINT ["java", "-jar", "booking-system.jar"]
