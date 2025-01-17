@@ -1,6 +1,11 @@
 
 package booking.models;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,9 +19,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import java.time.LocalDateTime;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -35,7 +37,7 @@ public class User {
     
     @NotBlank(message = "First name is mandatory ")
     @Size (max = 50, message = "First name cannot be longer than 50 characters")
-    private String name;
+    private String firstName;
     
     @NotBlank(message = "Last name is mandatory")
     @Size(max = 50, message = "Last name cannot be longer than 50 characters")
@@ -61,8 +63,8 @@ public class User {
     private LocalDateTime updatedAt;
 
     
-    public User(String name, String lastName, String email, Role role){
-        this.name = name;
+    public User(String firstName, String lastName, String email, Role role){
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
@@ -79,12 +81,12 @@ public class User {
         this.UserId = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

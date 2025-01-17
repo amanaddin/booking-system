@@ -28,15 +28,13 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("user")
-                .password(passwordEncoder().encode("password"))
-                .roles("USER")
-                .build());
-        return manager;
-    }
+	
+	  @Bean public UserDetailsService userDetailsService() {
+	  InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+	  manager.createUser(User.withUsername("user")
+	  .password(passwordEncoder().encode("password")) .roles("USER") .build());
+	  return manager; }
+	 
 
     @Bean
     public PasswordEncoder passwordEncoder() {
