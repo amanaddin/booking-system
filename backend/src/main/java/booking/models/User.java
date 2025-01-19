@@ -2,6 +2,7 @@
 package booking.models;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -53,13 +54,14 @@ public class User {
     
     @Column(name = "password")
     private String password;
-
-    
+   
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;
     
-    @UpdateTimestamp
+    private String uuid;
+
+	@UpdateTimestamp
     private LocalDateTime updatedAt;
 
     
@@ -135,4 +137,12 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String getUuid() {
+		return uuid;
+	}
+
+	public void createUuid() {
+		this.uuid = UUID.randomUUID().toString();
+	}
 }

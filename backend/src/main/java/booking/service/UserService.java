@@ -24,13 +24,16 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
     
-    public List<User> getAllUsers() {
+    public List<User> findAllUsers() {
         return userRep.findAll();
     }
 
     @SuppressWarnings("deprecation")
-	public User getUserById(Long userId) {
+	public User findUserById(Long userId) {
         return userRep.getById(userId);
+    }
+    public User findUserByUuid(String uuid) {
+    	return userRep.findUserByUuid(uuid).orElseThrow(() -> new UserNotFountException("There is no User with this uuid"));
     }
 
     public User createUser(User user) {
@@ -38,6 +41,7 @@ public class UserService {
         if(!rawPassword.isBlank()){
             user.setPassword(passwordEncoder.encode(rawPassword));
         }
+        user.createUuid();
         return userRep.save(user);
     }
 

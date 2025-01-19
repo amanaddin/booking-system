@@ -42,8 +42,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<UserLimitedDTO> getUser() {
-        return userMapper.limitedUserList(service.getAllUsers());
+    public List<UserLimitedDTO> findAllUsers() {
+        return userMapper.limitedUserList(service.findAllUsers());
     }
 
     @PostMapping("/create")
@@ -51,9 +51,11 @@ public class UserController {
         return service.createUser(user);
     }
     
-    @GetMapping
-    public UserLimitedDTO getUserById(@RequestHeader Long id) {
-    	return userMapper.limitedUser(service.getUserById(id));
+  
+    
+    @GetMapping()
+    public UserLimitedDTO findUserByUuid(@RequestHeader String uuid) {
+    	return userMapper.limitedUser(service.findUserByUuid(uuid));
     }
 
     @DeleteMapping("/user/{id}")
